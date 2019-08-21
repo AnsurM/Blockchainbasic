@@ -40,5 +40,6 @@ module.exports = {
     getUsers,
     addUser,
     returnBlockchain,
-    addToBlockchain
+    addToBlockchain,
+    resetStore
 }
