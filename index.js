@@ -5,13 +5,13 @@ var mongoose = require("mongoose");
 var bodyParser = require('body-parser')
 // var blo = require("./Chain");
 var ip = require('ip');
+var os = require('os');
 // var blo1 = blo.d;
 const {getUsers, addUser, resetStore} = require('./store');
 
 const Blockchain = require('./Blockchain');
 
 app.use(bodyParser.json())
-
 
 var port = process.env.PORT || 8080;
 
@@ -67,7 +67,8 @@ function getIp(req) {
 }
 
 app.get("/", function(req,res){
-    res.json({status: 200, message: 'Welcome to our Blockchain...'});
+    res.json({status: 200, message: 'Welcome to our Blockchain...',
+                users: getUsers()});
 });
 
 app.post('/addBlock', (req,res) => {
