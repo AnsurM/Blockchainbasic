@@ -1,5 +1,9 @@
 var store = require('store');
 
+const resetStore = () => {
+    store.clearAll();
+    return store;
+}
 
 const setStoreData = (variable, data) => {
     store.set(variable, data);

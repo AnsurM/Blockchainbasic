@@ -6,7 +6,7 @@ var bodyParser = require('body-parser')
 // var blo = require("./Chain");
 var ip = require('ip');
 // var blo1 = blo.d;
-const {getUsers, addUser} = require('./store');
+const {getUsers, addUser, resetStore} = require('./store');
 
 const Blockchain = require('./Blockchain');
 
@@ -67,12 +67,7 @@ function getIp(req) {
 }
 
 app.get("/", function(req,res){
-    const reqIp = getIp(req);
-    if(!isIPregistered(reqIp))
-    {
-        return res.json(addUser(reqIp));        
-    }
-    return res.json(getUsers());
+    res.json({status: 200, message: 'Welcome to our Blockchain...'});
 });
 
 app.post('/addBlock', (req,res) => {
@@ -120,6 +115,19 @@ app.get('/getBlockchain', (req, res) => {
     else {
         return res.json(Blockchain.getBlockchain());
     }
+})
+
+app.get('/resetServer', (req, res) => {
+    resetStore();
+})
+
+app.get('/registerIp' , (req,res) => {
+    const reqIp = getIp(req);
+    if(!isIPregistered(reqIp))
+    {
+        return res.json(addUser(reqIp));        
+    }
+    return res.json(getUsers());
 })
 
 // app.listen(port, ip.address(), function(){
