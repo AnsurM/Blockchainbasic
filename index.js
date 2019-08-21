@@ -13,7 +13,8 @@ const Blockchain = require('./Blockchain');
 app.use(bodyParser.json())
 
 
-var Port=8080;
+var port = process.env.PORT || 8080;
+
 // var IP = "10.0.12.45"; // Change it to your Local IP. 
 
 // Remove the comment to save the data to database
@@ -121,6 +122,10 @@ app.get('/getBlockchain', (req, res) => {
     }
 })
 
-app.listen(Port, ip.address(), function(){
-    console.log("Server started - ", ip.address(), ':', Port);
+// app.listen(port, ip.address(), function(){
+//     console.log("Server started - ", ip.address(), ':', port);
+// });
+
+app.listen(port, '0.0.0.0', function(){
+    console.log("Server started - ", port);
 });
